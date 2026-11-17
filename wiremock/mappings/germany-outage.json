@@ -1,0 +1,8 @@
+{
+  "request": {"method":"GET", "url":"/rates/DE"},
+  "response": {
+    "status":503,
+    "headers":{"Content-Type":"application/json"},
+    "jsonBody":{"error":"service unavailable"}
+  }
+}

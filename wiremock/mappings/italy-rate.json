@@ -1,0 +1,8 @@
+{
+  "request": {"method":"GET", "url":"/rates/IT"},
+  "response": {
+    "status":200,
+    "headers":{"Content-Type":"application/json"},
+    "jsonBody":{"country":"IT","amount":6.50}
+  }
+}

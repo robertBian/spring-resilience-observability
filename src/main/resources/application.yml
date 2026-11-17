@@ -1,0 +1,31 @@
+server:
+  port: 8080
+upstream:
+  url: ${UPSTREAM_URL:http://localhost:8090}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics
+  tracing:
+    sampling:
+      probability: 1.0 # Demo only: configure lower in production
+  otlp:
+    tracing:
+      endpoint: ${OTLP_ENDPOINT:http://localhost:4318/v1/traces}
+resilience4j:
+  retry:
+    instances:
+      shipping-upstream:
+        maxAttempts: 3
+        waitDuration: 200ms
+        retryExceptions:
+          - org.springframework.web.client.RestClientException
+  circuitbreaker:
+    instances:
+      shipping-circuit:
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 15s
